@@ -1,14 +1,27 @@
+let beenClicked = false;
+
 let btn = document.querySelector("#load-btn");
 btn.addEventListener('click', async function(){
-   let response = await axios.get('items.txt');
-   let fruits = response.data.split(",");  
-   for (let x of fruits) {
-       console.log(x)
-       let card = document.createElement('div'); 
-       card.cardName = 'card';
-       card.style.width = '18rem';
-       card.innerHTML = "<div class='card-body'>Test</div>"
-    //    <div class = 'card-body'> <h5 class = 'card-title'>${x}</h5> </div> ";
-        // console.log(x)
-   }
+    if (beenClicked == true) {
+        return; //strop the event immediately
+    }
+
+    // Assign button to be clicked
+    beenClicked = true;
+    console.log('loading')
+    let response = await axios.get('items.txt');
+    let fruits = response.data.split(",");
+    let fruitList = document.querySelector('ul#fruits');  
+    for (let x of fruits) { 
+            //appendChild
+            let liElement = document.createElement('li');
+            liElement.innerHTML = x;
+            fruitList.appendChild(liElement)        
+
+            // innerHtml    
+            // fruitList.innerHTML += '<li> ${x} </li>';
+
+            // let newElement = '<li> ${x} </li>'
+            // fruitList.insertAdjacentHTML('beforeend', newElement)
+    }
 })
