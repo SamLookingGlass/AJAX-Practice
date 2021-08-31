@@ -6,7 +6,7 @@ btn.addEventListener('click', async function(){
         return; //strop the event immediately
     }
 
-    // Assign button to be clicked
+    // Assign button to be clicked (boolean flag)
     beenClicked = true;
     console.log('loading')
     let response = await axios.get('items.txt');
